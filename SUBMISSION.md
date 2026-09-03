@@ -57,6 +57,6 @@ We implemented 100% of the W3C WebMCP Community Group Draft Specification (2026)
 ---
 
 ## 5. Public Code Repository
-- GitHub URL: `https://github.com/your-username/aegis-warroom`
+- GitHub URL: `https://github.com/Rbil1y/AEGIS-WARROOM`
 - Open-Source License: MIT License (visible at root of repository)
 - Live Deployment URL: `https://aegis-warroom.vercel.app` (or Cloudflare Pages)

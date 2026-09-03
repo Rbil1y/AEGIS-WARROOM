@@ -111,8 +111,8 @@ When the operator clicks on any node in the topology canvas:
 ### Installation & Local Run
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-username/aegis-warroom.git
-cd aegis-warroom
+git clone https://github.com/Rbil1y/AEGIS-WARROOM.git
+cd AEGIS-WARROOM
 
 # 2. Install dependencies
 npm install
