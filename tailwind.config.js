@@ -7,35 +7,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        warroom: {
-          bg: "#06090e",
-          card: "#0b121c",
-          border: "#172638",
-          cyber: "#00f0ff",
-          alert: "#ff3366",
-          warning: "#ffaa00",
-          success: "#00ff88",
-          dim: "#4a627d"
+        canvas: {
+          bg: '#080c14',
+          subtle: '#0d131f',
+          surface: '#121a29',
+          elevated: '#1a2438',
+          border: '#1e293b',
+          borderHover: '#334155'
+        },
+        brand: {
+          primary: '#2563eb',
+          primaryHover: '#1d4ed8',
+          accent: '#38bdf8',
+          indigo: '#6366f1'
+        },
+        status: {
+          healthy: '#10b981',
+          healthyBg: 'rgba(16, 185, 129, 0.1)',
+          warning: '#f59e0b',
+          warningBg: 'rgba(245, 158, 11, 0.1)',
+          critical: '#ef4444',
+          criticalBg: 'rgba(239, 68, 68, 0.1)',
+          quarantine: '#818cf8',
+          quarantineBg: 'rgba(129, 140, 248, 0.1)'
         }
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'SF Mono', 'Consolas', 'monospace'],
       },
-      animation: {
-        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'radar': 'radar 4s linear infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-      },
-      keyframes: {
-        radar: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px rgba(0, 240, 255, 0.2)' },
-          '100%': { boxShadow: '0 0 20px rgba(0, 240, 255, 0.6)' },
-        }
+      boxShadow: {
+        'card': '0 4px 20px -2px rgba(0, 0, 0, 0.5)',
+        'elevated': '0 10px 30px -4px rgba(0, 0, 0, 0.6)',
+        'modal': '0 25px 50px -12px rgba(0, 0, 0, 0.75)'
       }
     },
   },

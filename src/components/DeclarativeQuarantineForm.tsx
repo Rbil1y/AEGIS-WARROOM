@@ -49,7 +49,7 @@ export const DeclarativeQuarantineForm: React.FC = () => {
         setAuditReceipt(receiptStr);
         setIsSubmitting(false);
         resolve(receiptStr);
-      }, 700);
+      }, 600);
     });
 
     if (isAgent && typeof (e as any).respondWith === 'function') {
@@ -60,35 +60,35 @@ export const DeclarativeQuarantineForm: React.FC = () => {
   const isQuarantined = telemetry.quarantinedSubnets.length > 0;
 
   return (
-    <div className="bg-warroom-card border border-warroom-border rounded-xl p-5 select-none relative overflow-hidden shadow-xl">
+    <div className="bg-canvas-subtle border border-canvas-border rounded-xl p-5 select-none relative shadow-card">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 mb-4 border-b border-warroom-border/80">
+      <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-canvas-border">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400">
+          <div className="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
             <ShieldAlert className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-xs font-bold font-mono text-white flex items-center gap-2">
-              BREAK-GLASS QUARANTINE PROTOCOL
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40">
-                DECLARATIVE WEBMCP
+            <h3 className="text-xs font-semibold text-white flex items-center gap-2 font-sans">
+              Break-Glass Quarantine Protocol
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/25">
+                Declarative WebMCP
               </span>
             </h3>
             <p className="text-[11px] text-slate-400 font-sans">
-              Auto-filled & submitted by AI Agent with SRE cryptographic sign-off
+              W3C HTML Form • Auto-invoked by agent with operator sign-off
             </p>
           </div>
         </div>
 
         <div>
           {isQuarantined ? (
-            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 font-mono">
+            <span className="px-2.5 py-1 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 flex items-center gap-1 font-sans">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              QUARANTINE ENFORCED
+              Subnet Quarantined
             </span>
           ) : (
-            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30 font-mono">
-              ARMED / AWAITING ACTION
+            <span className="px-2.5 py-1 rounded text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/25 font-sans">
+              Ready / Armed
             </span>
           )}
         </div>
@@ -103,13 +103,13 @@ export const DeclarativeQuarantineForm: React.FC = () => {
         toolautosubmit
         action="/api/v1/quarantine"
         onSubmit={handleSubmit}
-        className="space-y-4 font-sans text-xs relative z-10 transition-all duration-300 p-2 rounded-lg"
+        className="space-y-4 font-sans text-xs relative z-10 transition-all duration-200 p-2 rounded-lg"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {/* Target Subnet Field */}
           <div>
             <label htmlFor="subnetId" className="block text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5 text-cyan-400" />
+              <Lock className="w-3.5 h-3.5 text-slate-400" />
               Target Subnet ID
             </label>
             <input
@@ -119,14 +119,14 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               defaultValue="auth-ingress-us-east-1"
               required
               toolparamdescription="Exact cluster or subnet identifier to isolate (e.g. auth-ingress-us-east-1)"
-              className="w-full bg-slate-950 border border-warroom-border rounded-lg px-3.5 py-2 text-cyan-300 font-mono focus:outline-none focus:border-cyan-400 transition-colors"
+              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
 
           {/* Traffic Drain % */}
           <div>
             <label htmlFor="drainPercent" className="block text-slate-300 mb-1.5 font-medium">
-              Traffic Drain Percentage
+              Traffic Shed Percentage
             </label>
             <input
               type="number"
@@ -136,8 +136,8 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               max="100"
               defaultValue="100"
               required
-              toolparamdescription="Percentage of ingress traffic to immediately drop or redirect (10-100)"
-              className="w-full bg-slate-950 border border-warroom-border rounded-lg px-3.5 py-2 text-cyan-300 font-mono focus:outline-none focus:border-cyan-400 transition-colors"
+              toolparamdescription="Percentage of ingress traffic to drop or redirect"
+              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
 
@@ -151,7 +151,7 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               name="failoverRegion"
               required
               toolparamdescription="Destination cloud region designated to absorb redirected workloads"
-              className="w-full bg-slate-950 border border-warroom-border rounded-lg px-3.5 py-2 text-cyan-300 font-mono focus:outline-none focus:border-cyan-400 transition-colors cursor-pointer"
+              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-sans text-xs focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
             >
               <option value="eu-central-1">EU-Central (Frankfurt Anycast)</option>
               <option value="ap-south-1">APAC-South (Singapore Secondary)</option>
@@ -161,8 +161,8 @@ export const DeclarativeQuarantineForm: React.FC = () => {
           {/* 2FA Token Signature */}
           <div>
             <label htmlFor="authSignature" className="block text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
-              <Key className="w-3.5 h-3.5 text-amber-400" />
-              SRE Cryptographic 2FA Token
+              <Key className="w-3.5 h-3.5 text-slate-400" />
+              SRE Authorization Token
             </label>
             <input
               type="password"
@@ -170,45 +170,45 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               name="authSignature"
               defaultValue="SIG_BREAK_GLASS_OPERATOR_0x7F9B"
               required
-              toolparamdescription="High-privilege emergency operator token for break-glass audit trail"
-              className="w-full bg-slate-950 border border-warroom-border rounded-lg px-3.5 py-2 text-cyan-300 font-mono focus:outline-none focus:border-cyan-400 transition-colors"
+              toolparamdescription="High-privilege emergency operator token"
+              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
         </div>
 
-        {/* Submit Section */}
+        {/* Action Button */}
         <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-          <span className="text-[11px] text-slate-400 font-mono">
-            W3C Attributes: <code className="text-cyan-400 font-bold">toolname</code>, <code className="text-cyan-400 font-bold">toolautosubmit</code>, <code className="text-cyan-400 font-bold">:tool-form-active</code>
+          <span className="text-[11px] text-slate-500 font-mono">
+            W3C Spec: <code className="text-slate-400">toolname</code>, <code className="text-slate-400">toolautosubmit</code>, <code className="text-slate-400">:tool-form-active</code>
           </span>
 
           <button
             type="submit"
             id="quarantine-submit-btn"
             disabled={isSubmitting || isQuarantined}
-            className="px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-mono font-bold text-xs tracking-wider uppercase flex items-center gap-2 shadow-[0_0_20px_rgba(255,51,102,0.4)] transition-all disabled:opacity-50 cursor-pointer"
+            className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-medium text-xs flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer shadow-sm"
           >
             {isSubmitting ? (
-              <>Executing Protocol...</>
+              <>Executing Quarantine...</>
             ) : isQuarantined ? (
-              <>Subnet Quarantined</>
+              <>Subnet Isolated</>
             ) : (
               <>
-                Execute Quarantine <ArrowRight className="w-4 h-4" />
+                Execute Quarantine <ArrowRight className="w-3.5 h-3.5" />
               </>
             )}
           </button>
         </div>
       </form>
 
-      {/* Audit Receipt Modal / Box */}
+      {/* Audit Receipt */}
       {auditReceipt && (
-        <div className="mt-4 p-4 rounded-xl bg-slate-950 border border-emerald-500/40 font-mono text-xs">
-          <div className="flex items-center gap-2 text-emerald-400 font-bold mb-2">
+        <div className="mt-4 p-3.5 rounded-lg bg-canvas-bg border border-canvas-border font-mono text-xs">
+          <div className="flex items-center gap-2 text-emerald-400 font-medium mb-1.5 text-[11px]">
             <ShieldCheck className="w-4 h-4" />
-            CRYPTOGRAPHIC QUARANTINE AUDIT RECEIPT (RETURNED VIA e.respondWith):
+            Cryptographic Audit Receipt (Returned via e.respondWith):
           </div>
-          <pre className="text-slate-300 text-[11px] overflow-x-auto whitespace-pre-wrap">
+          <pre className="text-slate-300 text-[10px] overflow-x-auto whitespace-pre-wrap">
             {auditReceipt}
           </pre>
         </div>
