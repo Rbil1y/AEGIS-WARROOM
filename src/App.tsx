@@ -44,27 +44,27 @@ export const App: React.FC = () => {
         {/* Tactical Deck Switcher Bar */}
         <div className="flex items-center justify-between border-b border-canvas-border pb-3">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold text-slate-400 font-sans">
-              Tactical Operations View:
+            <span className="text-xs font-bold text-white font-sans">
+              Operations Deck:
             </span>
-            <div className="flex items-center gap-1.5 bg-canvas-surface p-1 rounded-lg border border-canvas-border text-xs font-sans">
+            <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-lg border border-slate-700 text-xs font-sans">
               <button
                 onClick={() => setActiveBottomView('CONTROLS')}
-                className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-colors ${
+                className={`px-3.5 py-1.5 rounded-md flex items-center gap-2 transition-colors cursor-pointer ${
                   activeBottomView === 'CONTROLS'
-                    ? 'bg-blue-600 text-white font-medium shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-blue-600 text-white font-bold shadow-sm'
+                    : 'text-slate-200 hover:text-white hover:bg-slate-800'
                 }`}
               >
                 <Sliders className="w-3.5 h-3.5" />
-                Diagnostic & Mitigation Controls
+                Mitigation Controls & Diagnostics
               </button>
               <button
                 onClick={() => setActiveBottomView('TERMINAL')}
-                className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-colors ${
+                className={`px-3.5 py-1.5 rounded-md flex items-center gap-2 transition-colors cursor-pointer ${
                   activeBottomView === 'TERMINAL'
-                    ? 'bg-blue-600 text-white font-medium shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-blue-600 text-white font-bold shadow-sm'
+                    : 'text-slate-200 hover:text-white hover:bg-slate-800'
                 }`}
               >
                 <Terminal className="w-3.5 h-3.5" />
@@ -73,12 +73,12 @@ export const App: React.FC = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-3 text-xs font-sans text-slate-400">
-            <span className="flex items-center gap-1 text-emerald-400">
-              <ShieldCheck className="w-3.5 h-3.5" /> Origin-Keyed Cluster Isolated
+          <div className="hidden md:flex items-center gap-3 text-xs font-sans">
+            <span className="flex items-center gap-1.5 text-emerald-300 font-semibold bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-500/30">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" /> Origin-Keyed Cluster Isolated
             </span>
-            <span className="text-slate-700">|</span>
-            <span>Policy: <code className="text-slate-300 font-mono">tools=(self)</code></span>
+            <span className="text-slate-600">|</span>
+            <span className="text-slate-300">Policy: <code className="text-white font-mono font-bold">tools=(self)</code></span>
           </div>
         </div>
 
@@ -108,14 +108,14 @@ export const App: React.FC = () => {
       </main>
 
       {/* Enterprise Footer */}
-      <footer className="border-t border-canvas-border bg-canvas-subtle/80 px-6 py-4 mt-auto">
-        <div className="max-w-[1800px] mx-auto flex flex-wrap items-center justify-between gap-4 text-xs font-sans text-slate-400">
+      <footer className="border-t border-canvas-border bg-slate-950 px-6 py-4 mt-auto">
+        <div className="max-w-[1800px] mx-auto flex flex-wrap items-center justify-between gap-4 text-xs font-sans text-slate-300">
           <div className="flex items-center gap-3">
-            <span className="text-white font-semibold">Aegis Incident Command</span>
+            <span className="text-white font-bold">Aegis Incident Command</span>
             <span>•</span>
-            <span>The WebMCP Challenge 2026</span>
+            <span className="text-slate-200">The WebMCP Challenge 2026</span>
             <span>•</span>
-            <span className="text-slate-300">Open Source (MIT License)</span>
+            <span className="text-emerald-400 font-semibold">Open Source (MIT License)</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -123,17 +123,17 @@ export const App: React.FC = () => {
               href="https://webmachinelearning.github.io/webmcp/"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1"
+              className="hover:text-white transition-colors flex items-center gap-1 text-slate-300 font-medium"
             >
-              W3C Specification <ExternalLink className="w-3 h-3 text-slate-500" />
+              W3C Specification <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
             </a>
             <a
               href="https://developer.chrome.com/docs/ai/webmcp"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1"
+              className="hover:text-white transition-colors flex items-center gap-1 text-slate-300 font-medium"
             >
-              Chrome AI Docs <ExternalLink className="w-3 h-3 text-slate-500" />
+              Chrome AI Docs <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
             </a>
           </div>
         </div>

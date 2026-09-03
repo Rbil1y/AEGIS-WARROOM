@@ -5,20 +5,38 @@
 @layer base {
   body {
     background-color: #080c14;
-    color: #f1f5f9;
+    color: #f8fafc;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Universal High-Contrast Select Options (Prevents OS gray-on-white dropdown glitch) */
+  select {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+  }
+
+  /* High-Contrast Input Styling */
+  input, textarea, select {
+    color: #ffffff;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #94a3b8;
+  }
 }
 
 /* W3C WebMCP Declarative Form Pseudo-Classes (W3C Spec § 4.3) */
-/* Clean, professional enterprise focus states instead of neon glow */
 form:tool-form-active,
 form.tool-form-active {
   outline: 2px solid #3b82f6;
   outline-offset: 4px;
-  background-color: rgba(37, 99, 235, 0.04);
+  background-color: rgba(37, 99, 235, 0.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -26,14 +44,14 @@ button:tool-submit-active,
 button.tool-submit-active {
   outline: 2px solid #60a5fa;
   outline-offset: 2px;
-  background-color: #1d4ed8 !important;
+  background-color: #2563eb !important;
   color: #ffffff !important;
 }
 
 /* Subtle, refined scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -41,10 +59,10 @@ button.tool-submit-active {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #334155;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #475569;
 }

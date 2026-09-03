@@ -64,17 +64,17 @@ export const DeclarativeQuarantineForm: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-canvas-border">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+          <div className="w-8 h-8 rounded-lg bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400">
             <ShieldAlert className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-white flex items-center gap-2 font-sans">
+            <h3 className="text-xs font-bold text-white flex items-center gap-2 font-sans">
               Break-Glass Quarantine Protocol
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/25">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 font-semibold">
                 Declarative WebMCP
               </span>
             </h3>
-            <p className="text-[11px] text-slate-400 font-sans">
+            <p className="text-[11px] text-slate-300 font-sans">
               W3C HTML Form • Auto-invoked by agent with operator sign-off
             </p>
           </div>
@@ -82,12 +82,12 @@ export const DeclarativeQuarantineForm: React.FC = () => {
 
         <div>
           {isQuarantined ? (
-            <span className="px-2.5 py-1 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 flex items-center gap-1 font-sans">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="px-3 py-1 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 font-sans">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               Subnet Quarantined
             </span>
           ) : (
-            <span className="px-2.5 py-1 rounded text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/25 font-sans">
+            <span className="px-3 py-1 rounded text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 font-sans">
               Ready / Armed
             </span>
           )}
@@ -108,8 +108,8 @@ export const DeclarativeQuarantineForm: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {/* Target Subnet Field */}
           <div>
-            <label htmlFor="subnetId" className="block text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5 text-slate-400" />
+            <label htmlFor="subnetId" className="block text-slate-200 mb-1.5 font-bold flex items-center gap-1.5">
+              <Lock className="w-3.5 h-3.5 text-blue-400" />
               Target Subnet ID
             </label>
             <input
@@ -119,13 +119,13 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               defaultValue="auth-ingress-us-east-1"
               required
               toolparamdescription="Exact cluster or subnet identifier to isolate (e.g. auth-ingress-us-east-1)"
-              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2 text-white font-mono text-xs font-semibold focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
 
           {/* Traffic Drain % */}
           <div>
-            <label htmlFor="drainPercent" className="block text-slate-300 mb-1.5 font-medium">
+            <label htmlFor="drainPercent" className="block text-slate-200 mb-1.5 font-bold">
               Traffic Shed Percentage
             </label>
             <input
@@ -137,13 +137,13 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               defaultValue="100"
               required
               toolparamdescription="Percentage of ingress traffic to drop or redirect"
-              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2 text-white font-mono text-xs font-semibold focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
 
           {/* Destination Region */}
           <div>
-            <label htmlFor="failoverRegion" className="block text-slate-300 mb-1.5 font-medium">
+            <label htmlFor="failoverRegion" className="block text-slate-200 mb-1.5 font-bold">
               Failover Standby Region
             </label>
             <select
@@ -151,17 +151,17 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               name="failoverRegion"
               required
               toolparamdescription="Destination cloud region designated to absorb redirected workloads"
-              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-sans text-xs focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2 text-white font-sans text-xs font-semibold focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
             >
-              <option value="eu-central-1">EU-Central (Frankfurt Anycast)</option>
-              <option value="ap-south-1">APAC-South (Singapore Secondary)</option>
+              <option value="eu-central-1" className="bg-slate-900 text-white font-medium">EU-Central (Frankfurt Anycast)</option>
+              <option value="ap-south-1" className="bg-slate-900 text-white font-medium">APAC-South (Singapore Secondary)</option>
             </select>
           </div>
 
           {/* 2FA Token Signature */}
           <div>
-            <label htmlFor="authSignature" className="block text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
-              <Key className="w-3.5 h-3.5 text-slate-400" />
+            <label htmlFor="authSignature" className="block text-slate-200 mb-1.5 font-bold flex items-center gap-1.5">
+              <Key className="w-3.5 h-3.5 text-amber-400" />
               SRE Authorization Token
             </label>
             <input
@@ -171,22 +171,26 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               defaultValue="SIG_BREAK_GLASS_OPERATOR_0x7F9B"
               required
               toolparamdescription="High-privilege emergency operator token"
-              className="w-full bg-canvas-surface border border-canvas-border rounded-lg px-3 py-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2 text-white font-mono text-xs font-semibold focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
         </div>
 
         {/* Action Button */}
         <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-          <span className="text-[11px] text-slate-500 font-mono">
-            W3C Spec: <code className="text-slate-400">toolname</code>, <code className="text-slate-400">toolautosubmit</code>, <code className="text-slate-400">:tool-form-active</code>
+          <span className="text-xs text-slate-300 font-mono">
+            W3C Spec: <code className="text-blue-400 font-bold">toolname</code>, <code className="text-blue-400 font-bold">toolautosubmit</code>, <code className="text-blue-400 font-bold">:tool-form-active</code>
           </span>
 
           <button
             type="submit"
             id="quarantine-submit-btn"
             disabled={isSubmitting || isQuarantined}
-            className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-medium text-xs flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer shadow-sm"
+            className={`px-5 py-2.5 rounded-lg font-bold text-xs flex items-center gap-2 transition-colors shadow-sm cursor-pointer ${
+              isQuarantined
+                ? 'bg-slate-800 text-slate-400 border border-slate-700 cursor-not-allowed'
+                : 'bg-rose-600 hover:bg-rose-500 text-white'
+            }`}
           >
             {isSubmitting ? (
               <>Executing Quarantine...</>
@@ -194,7 +198,7 @@ export const DeclarativeQuarantineForm: React.FC = () => {
               <>Subnet Isolated</>
             ) : (
               <>
-                Execute Quarantine <ArrowRight className="w-3.5 h-3.5" />
+                Execute Quarantine <ArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
@@ -203,12 +207,12 @@ export const DeclarativeQuarantineForm: React.FC = () => {
 
       {/* Audit Receipt */}
       {auditReceipt && (
-        <div className="mt-4 p-3.5 rounded-lg bg-canvas-bg border border-canvas-border font-mono text-xs">
-          <div className="flex items-center gap-2 text-emerald-400 font-medium mb-1.5 text-[11px]">
+        <div className="mt-4 p-4 rounded-lg bg-slate-950 border border-slate-700 font-mono text-xs">
+          <div className="flex items-center gap-2 text-emerald-400 font-bold mb-2 text-xs">
             <ShieldCheck className="w-4 h-4" />
             Cryptographic Audit Receipt (Returned via e.respondWith):
           </div>
-          <pre className="text-slate-300 text-[10px] overflow-x-auto whitespace-pre-wrap">
+          <pre className="text-white text-[11px] overflow-x-auto whitespace-pre-wrap leading-relaxed">
             {auditReceipt}
           </pre>
         </div>
