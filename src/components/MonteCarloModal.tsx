@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, XSquare, Activity, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Play, XCircle, CheckCircle, AlertTriangle, Sparkles } from 'lucide-react';
 import { webMCPManager } from '../webmcp/manager';
 
 interface SimulationResult {
@@ -28,7 +28,6 @@ export const MonteCarloModal: React.FC = () => {
     const controller = new AbortController();
     setAbortController(controller);
 
-    // Progress counter visual interval
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 90) return prev;
@@ -37,7 +36,6 @@ export const MonteCarloModal: React.FC = () => {
     }, 200);
 
     try {
-      // Execute simulate_failover_latency via WebMCP with AbortSignal passed (§ 4.2.2)
       const res = await webMCPManager.executeTool('simulate_failover_latency', {
         sourceRegion: 'us-east-1',
         targetRegion: 'eu-central-1',
@@ -50,7 +48,7 @@ export const MonteCarloModal: React.FC = () => {
     } catch (err: any) {
       clearInterval(interval);
       if (err.name === 'AbortError' || controller.signal.aborted) {
-        setAbortedMessage('Simulation cleanly aborted by operator via WebMCP AbortSignal. In-flight tasks terminated.');
+        setAbortedMessage('Simulation cleanly cancelled by operator via WebMCP AbortSignal. Memory freed and background loops halted.');
       } else {
         setAbortedMessage(`Simulation Error: ${err.message}`);
       }
@@ -67,53 +65,62 @@ export const MonteCarloModal: React.FC = () => {
   };
 
   return (
-    <div className="bg-warroom-card border border-warroom-border rounded-xl p-4 select-none flex flex-col gap-3">
-      <div className="flex items-center justify-between pb-2 border-b border-warroom-border/80">
-        <div className="flex items-center gap-2">
-          <Activity className="w-4 h-4 text-cyan-400" />
-          <h3 className="text-xs font-bold font-mono text-white uppercase tracking-wider">
-            Monte Carlo Failover Engine (WebMCP AbortSignal Demo)
-          </h3>
+    <div className="bg-warroom-card border border-warroom-border rounded-xl p-5 select-none flex flex-col gap-3 shadow-xl">
+      {/* Header */}
+      <div className="flex items-center justify-between pb-3 border-b border-warroom-border/80">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+            <Sparkles className="w-4 h-4" />
+          </div>
+          <div>
+            <h3 className="text-xs font-bold font-mono text-white uppercase tracking-wider">
+              Monte Carlo Failover Simulator
+            </h3>
+            <p className="text-[11px] text-slate-400 font-sans">
+              10,000 packet stochastic queue forecast
+            </p>
+          </div>
         </div>
-        <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-500/30">
-          W3C § 4.2.2 Signal
+
+        <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">
+          W3C § 4.2.2 AbortSignal
         </span>
       </div>
 
-      <p className="text-xs font-mono text-slate-400">
-        Streams 10,000 simulated packet transfers across US-East and EU-Central to forecast buffer bloat. Pass a live <code className="text-cyan-300">AbortSignal</code> to test execution cancellation.
+      <p className="text-xs font-sans text-slate-300 leading-relaxed">
+        Simulates 10,000 packet transfers to calculate buffer bloat risk when shifting US-East to EU-Central. Supports real-time execution cancellation.
       </p>
 
       {/* Action Buttons */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3 pt-1">
         <button
           onClick={startSimulation}
           disabled={isRunning}
-          className="px-4 py-1.5 rounded-lg bg-cyan-950 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-bold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)] disabled:opacity-50 cursor-pointer"
+          className="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-black font-mono text-xs font-bold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,240,255,0.25)] disabled:opacity-50 cursor-pointer"
         >
-          <Play className="w-3.5 h-3.5 fill-cyan-400 text-cyan-400" />
-          {isRunning ? `Computing (${progress}%)...` : 'Run 10,000-Packet Simulation'}
+          <Play className="w-3.5 h-3.5 fill-black text-black" />
+          {isRunning ? `Simulating (${progress}%)...` : 'Run 10,000-Packet Simulation'}
         </button>
 
         {isRunning && (
           <button
             onClick={handleAbort}
-            className="px-4 py-1.5 rounded-lg bg-red-950 hover:bg-red-900 border border-red-500/50 text-red-300 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(255,51,102,0.3)] animate-pulse cursor-pointer"
+            className="px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-300 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(255,51,102,0.3)] animate-pulse cursor-pointer"
           >
-            <XSquare className="w-4 h-4 text-red-400" />
-            Abort via AbortSignal
+            <XCircle className="w-4 h-4 text-red-400" />
+            Cancel via AbortSignal
           </button>
         )}
       </div>
 
-      {/* Progress Bar */}
+      {/* Visual Progress Bar */}
       {isRunning && (
-        <div className="space-y-1">
-          <div className="flex justify-between text-[10px] font-mono text-cyan-400">
+        <div className="space-y-1.5 pt-2">
+          <div className="flex justify-between text-[11px] font-mono text-cyan-400">
             <span>Evaluating Stochastic Network Queues...</span>
             <span>{progress}%</span>
           </div>
-          <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+          <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-all duration-200"
               style={{ width: `${progress}%` }}
@@ -124,15 +131,15 @@ export const MonteCarloModal: React.FC = () => {
 
       {/* Result Display */}
       {result && (
-        <div className="p-3 bg-slate-950 rounded-lg border border-emerald-500/40 font-mono text-xs space-y-1">
-          <div className="text-emerald-400 font-bold flex items-center gap-1.5">
-            <CheckCircle className="w-3.5 h-3.5" /> Simulation Results ({result.iterationsRun} Iterations):
+        <div className="p-4 bg-slate-950 rounded-xl border border-emerald-500/40 font-sans text-xs space-y-2">
+          <div className="text-emerald-400 font-bold flex items-center gap-1.5 font-mono">
+            <CheckCircle className="w-4 h-4" /> Simulation Complete ({result.iterationsRun} Iterations):
           </div>
-          <div className="grid grid-cols-2 gap-2 pt-1 text-slate-300 text-[11px]">
-            <div>Delivery Rate: <span className="text-cyan-300 font-bold">{result.projectedDeliveryRate}</span></div>
-            <div>Projected P99: <span className="text-cyan-300 font-bold">{result.projectedP99Latency}</span></div>
+          <div className="grid grid-cols-2 gap-3 text-slate-300 text-xs font-mono">
+            <div className="bg-slate-900 p-2 rounded">Delivery Rate: <strong className="text-emerald-400">{result.projectedDeliveryRate}</strong></div>
+            <div className="bg-slate-900 p-2 rounded">Projected P99: <strong className="text-cyan-400">{result.projectedP99Latency}</strong></div>
           </div>
-          <div className="text-[11px] text-emerald-300/90 pt-1">
+          <div className="text-xs text-slate-300 pt-1 font-sans">
             {result.verdict}
           </div>
         </div>
@@ -140,7 +147,7 @@ export const MonteCarloModal: React.FC = () => {
 
       {/* Aborted Message Display */}
       {abortedMessage && (
-        <div className="p-3 bg-red-950/40 rounded-lg border border-red-500/40 font-mono text-xs text-red-300 flex items-start gap-2">
+        <div className="p-3.5 bg-red-950/40 rounded-xl border border-red-500/40 font-mono text-xs text-red-300 flex items-start gap-2.5">
           <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
           <span>{abortedMessage}</span>
         </div>
