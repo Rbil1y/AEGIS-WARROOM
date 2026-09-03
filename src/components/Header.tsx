@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="border-b border-canvas-border bg-canvas-subtle sticky top-0 z-30 select-none shadow-sm">
+    <header className="border-b border-canvas-border bg-canvas-subtle/80 backdrop-blur-md sticky top-0 z-30 select-none shadow-sm">
       {/* Top Bar: Brand, Scenario Selector & Key Telemetry */}
       <div className="max-w-[1800px] mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4">
         {/* Brand & System Status */}
@@ -59,13 +59,13 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Incident Scenario Selector */}
-        <div className="flex items-center gap-2.5 bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 shadow-sm">
+        <div className="flex items-center gap-2.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700/80 rounded-lg px-3 py-1.5 shadow-sm">
           <SlidersHorizontal className="w-3.5 h-3.5 text-blue-400" />
           <span className="text-xs text-slate-300 font-medium">Scenario:</span>
           <select
             value={state.scenario.id}
             onChange={(e) => telemetryEngine.selectScenario(e.target.value)}
-            className="bg-slate-900 text-xs font-semibold text-white focus:outline-none cursor-pointer pr-1"
+            className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer pr-1"
           >
             {ATTACK_SCENARIOS.map((scenario) => (
               <option key={scenario.id} value={scenario.id} className="bg-slate-900 text-white font-medium">
@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center gap-3 text-xs">
           {/* Status Badge */}
           <div
-            className={`px-3 py-1.5 rounded-md border font-semibold flex items-center gap-1.5 shadow-sm ${
+            className={`px-3 py-1.5 rounded-md border font-semibold flex items-center gap-1.5 shadow-sm backdrop-blur-sm ${
               state.threatLevel === 'CRITICAL'
                 ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
                 : state.threatLevel === 'STABLE'
@@ -96,14 +96,14 @@ export const Header: React.FC = () => {
           </div>
 
           {/* Ingress Volume */}
-          <div className="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 flex items-center gap-2 font-mono">
+          <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700/80 rounded-md px-3 py-1.5 flex items-center gap-2 font-mono">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
             <span className="text-slate-300 font-sans">Ingress:</span>
             <span className="font-bold text-white">{(state.globalRps / 1000).toFixed(1)}k RPS</span>
           </div>
 
           {/* P99 Latency */}
-          <div className="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 flex items-center gap-2 font-mono">
+          <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700/80 rounded-md px-3 py-1.5 flex items-center gap-2 font-mono">
             <Cpu className="w-3.5 h-3.5 text-slate-300" />
             <span className="text-slate-300 font-sans">P99:</span>
             <span className={`font-bold ${state.p99LatencyMs > 300 ? 'text-amber-300' : 'text-emerald-300'}`}>
@@ -112,7 +112,7 @@ export const Header: React.FC = () => {
           </div>
 
           {/* Incident Clock */}
-          <div className="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 flex items-center gap-1.5 font-mono text-white">
+          <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700/80 rounded-md px-3 py-1.5 flex items-center gap-1.5 font-mono text-white">
             <Clock className="w-3.5 h-3.5 text-blue-400" />
             <span className="font-bold">T+{formatTime(state.incidentTimerSeconds)}</span>
           </div>
@@ -120,7 +120,7 @@ export const Header: React.FC = () => {
           {/* Sound Toggle */}
           <button
             onClick={() => setAudioMuted(!audioMuted)}
-            className="p-2 rounded-md bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-2 rounded-md bg-slate-900/80 backdrop-blur-sm border border-slate-700/80 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
             title={audioMuted ? 'Muted' : 'Sound active'}
           >
             {audioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-blue-400" />}
@@ -128,8 +128,8 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Understated Triage Workflow Ribbon */}
-      <div className="border-t border-canvas-border bg-slate-950 px-6 py-2.5">
+      {/* Understated Triage Workflow Ribbon with frosted glass blur */}
+      <div className="border-t border-canvas-border/80 bg-slate-950/75 backdrop-blur-md px-6 py-2.5">
         <div className="max-w-[1800px] mx-auto flex items-center justify-between gap-4 text-xs font-sans">
           <div className="flex items-center gap-2 sm:gap-4 overflow-x-auto">
             {steps.map((step, idx) => {
